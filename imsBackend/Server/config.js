@@ -1,11 +1,8 @@
-const mySql = require("mysql");
+const { Sequelize } = require('sequelize');
 
-const config =  mySql.createConnection({
-        user: "root",
-        password: "",
-        database: "",
-        multipleStatements: true,
-    })
-    
-    
+const config = new Sequelize('ims-project', 'root', '', {
+  dialect: 'mysql',
+  host: 'localhost'
+});
+
 module.exports = config;
