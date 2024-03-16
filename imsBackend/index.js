@@ -2,6 +2,8 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const { authenticateUser } = require('./Controller/userController');
+const { addCategory , getAllCategories,updateCategory,getCategoryById, deleteCategory} = require('./Controller/categoryController');
+
 
 const app = express();
 app.use(cors({
@@ -33,5 +35,11 @@ app.post('/login', async (req, res) => {
        res.sendStatus(500);
    }
 });
+
+app.post('/categories', addCategory);
+app.get('/categories', getAllCategories);
+app.put('/categories/:id', updateCategory);
+app.get('/categories/:id', getCategoryById);
+app.delete('/categories/:id', deleteCategory);
 
 app.listen(4321)

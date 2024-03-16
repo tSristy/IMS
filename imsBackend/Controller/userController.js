@@ -4,7 +4,7 @@ const User = require('../Model/userModel');
 
 // JWT token Generate
 const generateToken = (userId, username, email, roleId) => {
-  return jwt.sign({ userId, username, email, roleId }, 'your_secret_key', { expiresIn: '1h' });
+  return jwt.sign({ userId, username, email, roleId }, 'secret_key', { expiresIn: '1h' });
 };
 
 const authenticateUser = async (username, password) => {
