@@ -2,8 +2,9 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const { authenticateUser } = require('./Controller/userController');
-const { addCategory , getAllCategories,updateCategory,getCategoryById, deleteCategory} = require('./Controller/categoryController');
-
+const { addCategory , getAllCategories,updateCategory,getCategoryById, deleteCategory, getAllCategoryIds} = require('./Controller/categoryController');
+const { addProduct, updateProduct, deleteProduct, getAllProducts, getProductById } = require('./Controller/productController'); 
+const Category = require('./Model/categoryModel');
 
 const app = express();
 app.use(cors({
@@ -36,10 +37,31 @@ app.post('/login', async (req, res) => {
    }
 });
 
+// Category
 app.post('/categories', addCategory);
 app.get('/categories', getAllCategories);
 app.put('/categories/:id', updateCategory);
 app.get('/categories/:id', getCategoryById);
 app.delete('/categories/:id', deleteCategory);
+
+//   app.get('/category-ids', getAllCategoryIds);
+app.get('/category-ids', async (req, res) => {
+    try {
+      const categoryIds = await Category.findAll({ attributes: ['Category_Id'] });
+      const ids = categoryIds.map(category => category.Category_Id);
+      res.json(ids);
+    } catch (error) {
+      console.error('Error fetching category IDs:', error);
+      res.status(500).json({ error: 'Failed to fetch category IDs' });
+    }
+  });
+
+
+// Product
+app.post('/products', addProduct);
+app.get('/products', getAllProducts);
+app.put('/products/:id', updateProduct);
+app.get('/products/:id', getProductById);
+app.delete('/products/:id', deleteProduct);
 
 app.listen(4321)

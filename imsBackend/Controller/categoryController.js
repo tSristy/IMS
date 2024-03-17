@@ -46,7 +46,8 @@ const updateCategory = async (req, res) => {
       res.status(500).json({ error: 'Failed to update category' });
     }
   };
-// Fetch a category for edit
+
+// Fetch category for edit
   const getCategoryById = async (req, res) => {
     try {
       const categoryId = req.params.id;
@@ -74,4 +75,16 @@ const deleteCategory = async (req, res) => {
   }
 };
 
-module.exports = { addCategory, getAllCategories,updateCategory,getCategoryById, deleteCategory };
+// for fetch all row of category
+const getAllCategoryIds = async (req, res) => {
+  try {
+    const categoryIds = await Category.findAll({ attributes: ['Category_Id'] });
+    const ids = categoryIds.map(category => category.Category_Id);
+    res.json(ids);
+  } catch (error) {
+    console.error('Error fetching category IDs:', error);
+    res.status(500).json({ error: 'Failed to fetch category IDs' });
+  }
+};
+
+module.exports = { addCategory, getAllCategories,updateCategory,getCategoryById, deleteCategory, getAllCategoryIds };

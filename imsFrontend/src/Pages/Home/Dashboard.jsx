@@ -43,7 +43,7 @@ const DashboardSidebar = () => {
                   <li className='w-100'>
                       <Link 
                           className='nav-link text-white px-0 align-middle'
-                          to="/home/product">
+                          to="/product">
                           <i className='fs-4 bi-shop ms-2'></i>
                           <span className='ms-2 d-none d-sm-inline'>Product</span>
                       </Link>
