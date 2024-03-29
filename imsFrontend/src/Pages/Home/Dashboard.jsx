@@ -52,6 +52,24 @@ const DashboardSidebar = () => {
                   <li className='w-100'>
                       <Link 
                           className='nav-link text-white px-0 align-middle'
+                          to="/transactionMaster">
+                          <i className='fs-4 bi-cash ms-2'></i>
+                          <span className='ms-2 d-none d-sm-inline'>Transaction Master</span>
+                      </Link>
+                  </li>
+
+                  <li className='w-100'>
+                      <Link 
+                          className='nav-link text-white px-0 align-middle'
+                          to="/transactionDetails">
+                          <i className='fs-4 bi-ticket-detailed-fill ms-2'></i>
+                          <span className='ms-2 d-none d-sm-inline'>Transaction Details</span>
+                      </Link>
+                  </li>
+
+                  <li className='w-100'>
+                      <Link 
+                          className='nav-link text-white px-0 align-middle'
                           to="/home/profile">
                           <i className='fs-4 bi-person ms-2'></i>
                           <span className='ms-2 d-none d-sm-inline'>Profile</span>
@@ -73,7 +91,7 @@ const DashboardTopBar = () => {
 
   return (
       <div className='p-2 d-flex justify-content-between shadow'>
-          <h4>Hello</h4>
+          <h4>Inventory Management</h4>
 
           <div className="dropdown ml-auto" style={{ marginRight: '50px' }}>
               <button 

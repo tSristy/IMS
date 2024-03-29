@@ -19,10 +19,10 @@ const TransactionDetails = config.define('transaction_details', {
     type: DataTypes.STRING,
     allowNull: false
   },
-  Quantity:{
-    type: DataTypes.INTEGER,
-    allowNull: false
-  },
+  // Quantity:{
+  //   type: DataTypes.INTEGER,
+  //   allowNull: false
+  // },
   Unit_Price:{
     type: DataTypes.DOUBLE,
     allowNull: false
@@ -35,10 +35,10 @@ const TransactionDetails = config.define('transaction_details', {
     type: DataTypes.STRING,
     allowNull: false
   },
-  Abs_Quantity:{
-    type: DataTypes.INTEGER,
-    allowNull:false
-  },
+  // Abs_Quantity:{
+  //   type: DataTypes.INTEGER,
+  //   allowNull:false
+  // },
   Created_By:{
     type: DataTypes.STRING,
     allowNull: false
@@ -54,7 +54,8 @@ const TransactionDetails = config.define('transaction_details', {
   },
   Modified_Date: {
     type: DataTypes.DATE,
-    allowNull: false
+    allowNull: false,
+    defaultValue: DataTypes.NOW
   }
 }, {
   timestamps: false

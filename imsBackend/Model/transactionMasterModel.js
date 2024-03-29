@@ -15,8 +15,21 @@ const TransactionMaster = config.define('transaction_master', {
     type: DataTypes.STRING,
     allowNull: false
   },
+  MVT_Date: {
+    type: DataTypes.DATE,
+    allowNull: false,
+    defaultValue: DataTypes.NOW
+  },
   MVT_Type: {
     type: DataTypes.STRING,
+    allowNull: false
+  },
+  Company_Id:{
+    type: DataTypes.INTEGER,
+    allowNull: false
+  },
+  Quantity:{
+    type: DataTypes.INTEGER,
     allowNull: false
   },
   Created_By: {
@@ -34,9 +47,12 @@ const TransactionMaster = config.define('transaction_master', {
   },
   Modified_Date: {
     type: DataTypes.DATE,
-    allowNull: false
+    allowNull: false,
+    defaultValue: DataTypes.NOW
   }
-}, {
+}, 
+{
+  tableName: 'transaction_master',
   timestamps: false
 });
 

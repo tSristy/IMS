@@ -5,6 +5,8 @@ const { authenticateUser } = require('./Controller/userController');
 const { addCategory , getAllCategories,updateCategory,getCategoryById, deleteCategory, getAllCategoryIds} = require('./Controller/categoryController');
 const { addProduct, updateProduct, deleteProduct, getAllProducts, getProductById } = require('./Controller/productController'); 
 const Category = require('./Model/categoryModel');
+// const { addTransactionDetails } = require('./Controller/tDetailsController')
+const { addTransaction, getAllTransactionIds } =  require('./Controller/transactionsController');
 
 const app = express();
 app.use(cors({
@@ -63,5 +65,12 @@ app.get('/products', getAllProducts);
 app.put('/products/:id', updateProduct);
 app.get('/products/:id', getProductById);
 app.delete('/products/:id', deleteProduct);
+
+
+
+// Transaction
+app.post('/transactions', addTransaction);
+app.get('/transaction_master', getAllTransactionIds);
+
 
 app.listen(4321)
