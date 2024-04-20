@@ -7,12 +7,12 @@ import Dashboard from '../Pages/Home/Dashboard';
 
 const Layout = (props) => {
     return (
-        <div>
-            {/* <Stack direction="row">
-                <Outlet/>
-            </Stack> */}
             <Dashboard />
-        </div>
+        // <div>
+        //     <Stack direction="row">
+        //         <Outlet/>
+        //     </Stack>
+        // </div>
     );
 };
 

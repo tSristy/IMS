@@ -22,6 +22,15 @@ const DashboardSidebar = () => {
                   className='nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start'
                   id='menu'>
 
+<li className='w-100'>
+                      <Link 
+                          className='nav-link text-white px-0 align-middle'
+                          to="/newCat">
+                          <i className='fs-4 bi-speedometer2 ms-2'></i>
+                          <span className='ms-2 d-none d-sm-inline'>NEW UX/UI</span>
+                      </Link>
+                  </li>
+
                   <li className='w-100'>
                       <Link 
                           className='nav-link text-white px-0 align-middle'
@@ -58,7 +67,7 @@ const DashboardSidebar = () => {
                       </Link>
                   </li>
 
-                  <li className='w-100'>
+                  {/* <li className='w-100'>
                       <Link 
                           className='nav-link text-white px-0 align-middle'
                           to="/transactionDetails">
@@ -74,7 +83,7 @@ const DashboardSidebar = () => {
                           <i className='fs-4 bi-person ms-2'></i>
                           <span className='ms-2 d-none d-sm-inline'>Profile</span>
                       </Link>
-                  </li>
+                  </li> */}
               </ul>
           </div>
       </div>

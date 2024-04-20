@@ -6,6 +6,8 @@ import Category from "../Pages/Home/Category";
 import Home from "../Pages/Home/Home";
 import Product from "../Pages/Home/Product";
 import TransactionMaster from "../Pages/Home/TransactionMaster";
+import CreateCategory from "../Pages/Category/CreateCategory";
+import ListCategory from "../Pages/Category/ListCategory";
 
 const router = createBrowserRouter([
     {
@@ -25,6 +27,10 @@ const router = createBrowserRouter([
             {
                 path: 'category',
                 element: <Category />
+            },
+            {
+                path: 'newcat',
+                element: <ListCategory />
             },
             {
                 path: 'product',
