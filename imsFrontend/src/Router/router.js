@@ -29,8 +29,12 @@ const router = createBrowserRouter([
                 element: <Category />
             },
             {
-                path: 'newcat',
+                path: 'ListCat',
                 element: <ListCategory />
+            },
+            {
+                path: 'newCat',
+                element: <CreateCategory />
             },
             {
                 path: 'product',

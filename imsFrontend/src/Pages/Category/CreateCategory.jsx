@@ -90,7 +90,7 @@ const CreateCategory = () => {
 
               <Stack gap={2} className="col-md-5 mx-auto">
                 <Button variant="outline-primary" type="submit" >Save changes</Button>
-                <Button variant="outline-secondary" onClick={(e)=>{ navigate("/home")}}>Go back</Button>
+                <Button variant="outline-secondary" onClick={(e)=>{ navigate("/ListCat")}}>Go back</Button>
               </Stack>
 
             </Form>
