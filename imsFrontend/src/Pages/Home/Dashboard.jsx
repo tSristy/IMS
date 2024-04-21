@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link, Outlet } from 'react-router-dom';
 import "bootstrap-icons/font/bootstrap-icons.css";
 
@@ -22,14 +22,26 @@ const DashboardSidebar = () => {
                   className='nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start'
                   id='menu'>
 
+<li className='w-100'>
+                      <Link 
+                          className='nav-link text-dark px-0 align-middle'
+                          to="/newCat">
+                          <i className='fs-4 bi-speedometer2 ms-2'></i>
+                          <span className='ms-2 d-none d-sm-inline'>NEW UX/UI</span>
+                      </Link>
+                      <hr />
+
+                  </li>
+
                   <li className='w-100'>
                       <Link 
                           className='nav-link text-dark px-0 align-middle'
-                          to="/home" >
+                          to="/home">
                           <i className='fs-4 bi-speedometer2 ms-2'></i>
                           <span className='ms-2 d-none d-sm-inline'>Dashboard</span>
                       </Link>
                       <hr />
+
                   </li>
 
                   <li className='w-100'>
@@ -65,27 +77,23 @@ const DashboardSidebar = () => {
 
                   </li>
 
-                  <li className='w-100'>
+                  {/* <li className='w-100'>
                       <Link 
-                          className='nav-link text-dark px-0 align-middle'
+                          className='nav-link text-white px-0 align-middle'
                           to="/transactionDetails">
                           <i className='fs-4 bi-ticket-detailed-fill ms-2'></i>
                           <span className='ms-2 d-none d-sm-inline'>Transaction Details</span>
                       </Link>
-                      <hr />
-
                   </li>
 
                   <li className='w-100'>
                       <Link 
-                          className='nav-link text-dark px-0 align-middle'
+                          className='nav-link text-white px-0 align-middle'
                           to="/home/profile">
                           <i className='fs-4 bi-person ms-2'></i>
                           <span className='ms-2 d-none d-sm-inline'>Profile</span>
                       </Link>
-                      <hr />
-
-                  </li>
+                  </li> */}
               </ul>
           </div>
       </div>
@@ -94,26 +102,32 @@ const DashboardSidebar = () => {
 
 // DashboardTopBar
 const DashboardTopBar = () => {
-    const handleLogout = () => {
-        // handle logout functionality
-    };
+//   const [dropDown, setDropdown] = useState(false);
+
+  const handleLogout = () => {
+    //   setDropdown(!dropDown);
+  };
 
   return (
-      <div className='p-2 d-flex justify-content-between align-items-center text-white w-100' style={{backgroundColor: '#53A0F1'}}>
-          {/* <h4></h4> */}
+    <div className='container-fluid p-0'>
+    <div className='row'>
+      <div className='col p-0'>
+        <div className='p-2 d-flex justify-content-between text-white w-100' style={{backgroundColor: '#53A0F1'}}>
           <div></div>
-
-          <div className="mr-3">
-              <button 
-                  className="btn btn-secondary" 
-                  type="button" 
-                  id="logoutButton" 
-                  onClick={handleLogout}
-              >
-                  <i className="bi bi-power fs-4"></i>
-              </button>
+          <div className="ml-auto" style={{ marginRight: '20px' }}>
+            <button 
+              className="btn btn-secondary" 
+              type="button" 
+              id="dropdownMenuButton" 
+              onClick={handleLogout}
+            >
+              <i className="bi bi-power fs-4"></i>
+            </button>
           </div>
+        </div>
       </div>
+    </div>
+  </div>
   );
 }
 
@@ -121,9 +135,9 @@ const Dashboard = () => {
 
 
   return (
-    <div className='container-fluid p-0'>
+    <div className='container-fluid'>
         <DashboardTopBar /> 
-        <div className='row flex-nowrap'>
+      <div className='row flex-nowrap'>
                 <DashboardSidebar /> 
                 <div className='col p-0 m-0'>
                     <div className='p-2'>

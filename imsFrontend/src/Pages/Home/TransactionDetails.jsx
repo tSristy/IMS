@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './styles.css';
+// import './styles.css';
 
 const TransactionDetails = ({ quantity, onTransactionDetailsChange }) => {
   const [productIds, setProductIds] = useState([]);
