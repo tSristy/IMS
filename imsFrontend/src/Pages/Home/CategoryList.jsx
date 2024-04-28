@@ -77,8 +77,8 @@ const CategoryList = () => {
   return (
     <div style={{ boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.1)', padding: '20px', borderRadius: '10px', width: 'fit-content', margin: '0 auto' }}>
       <h2>Category List</h2>
-      <div style={{ marginBottom: '20px' }}>
-        <input type="text" placeholder="Search by category name" value={searchTerm} onChange={(e) => handleSearch(e.target.value)} style={{ padding: '5px', borderRadius: '5px', marginRight: '10px' }} />
+      <div style={{ marginBottom: '20px', display: 'flex', alignItems: 'center' }}>
+        <input type="text" placeholder="Search by category name" value={searchTerm} onChange={(e) => handleSearch(e.target.value)} style={{ padding: '5px', borderRadius: '5px', marginRight: '5px',width: 'calc(100% - 100px)' }} />
         <button onClick={() => handleSearch('')} style={{ padding: '5px 10px', borderRadius: '5px' }}>Clear</button>
       </div>
       <table style={{ width: '100%', borderCollapse: 'collapse' }}>

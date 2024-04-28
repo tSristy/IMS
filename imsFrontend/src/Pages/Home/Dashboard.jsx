@@ -29,6 +29,19 @@ const DashboardSidebar = () => {
                             <i className='fs-4 bi-speedometer2 ms-2'></i>
                             <span className='ms-2 d-none d-sm-inline'>NEW UX/UI</span>
                         </Link>
+                        <hr />
+
+                    </li>
+
+                    <li className='w-100'>
+                        <Link
+                            className='nav-link text-white px-0 align-middle'
+                            to="/ListProduct">
+                            <i className='fs-4 bi-speedometer2 ms-2'></i>
+                            <span className='ms-2 d-none d-sm-inline'>NEW product UX/UI</span>
+                        </Link>
+                        <hr />
+
                     </li>
 
                     <li className='w-100'>
@@ -38,6 +51,7 @@ const DashboardSidebar = () => {
                             <i className='fs-4 bi-speedometer2 ms-2'></i>
                             <span className='ms-2 d-none d-sm-inline'>Dashboard</span>
                         </Link>
+                        <hr />
                     </li>
 
                     <li className='w-100'>
@@ -47,6 +61,8 @@ const DashboardSidebar = () => {
                             <i className='fs-4 bi-columns ms-2'></i>
                             <span className='ms-2 d-none d-sm-inline'>Category</span>
                         </Link>
+                        <hr />
+
                     </li>
 
                     <li className='w-100'>
@@ -56,6 +72,8 @@ const DashboardSidebar = () => {
                             <i className='fs-4 bi-shop ms-2'></i>
                             <span className='ms-2 d-none d-sm-inline'>Product</span>
                         </Link>
+                        <hr />
+
                     </li>
 
                     <li className='w-100'>
@@ -65,6 +83,8 @@ const DashboardSidebar = () => {
                             <i className='fs-4 bi-cash ms-2'></i>
                             <span className='ms-2 d-none d-sm-inline'>Transaction Master</span>
                         </Link>
+                        <hr />
+
                     </li>
 
                     {/* <li className='w-100'>

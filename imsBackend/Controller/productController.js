@@ -1,16 +1,21 @@
 const Product = require('../Model/productModel');
+const Category = require('../Model/categoryModel');
 
 // Add a new product
 const addProduct = async (req, res) => {
   try {
     const { Product_Type, Product_Name, Brand, Depreciation, Model_No, Category_Id, Created_By, Created_Date, Modified_By, Modified_Date } = req.body;
+    const category = await Category.findOne({ where: { Name: Category_Name } });
+    if (!category) {
+      return res.status(404).json({ error: 'Category not found' });
+    }
     const newProduct = await Product.create({
       Product_Type,
       Product_Name,
       Brand,
       Depreciation,
       Model_No,
-      Category_Id,
+      Category_Id: category.id,
       Created_By,
       Created_Date,
       Modified_By,

@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Button, Card, Col, Container, Form, InputGroup, Row, Stack, Table } from 'react-bootstrap';
+import { Button, Card, Col, Container, Form, InputGroup, Row, Stack, Table, Modal } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 
 const ListCategory = () => {
     const navigate = useNavigate();
+    const [showEditModal, setShowEditModal] = useState(false);
     const [showCategoryList, setShowCategoryList] = useState(false);
     const [categories, setCategories] = useState([]);
     const [editCategory, setEditCategory] = useState(null);
@@ -38,6 +39,7 @@ const ListCategory = () => {
             const response = await axios.get(`http://localhost:4321/categories/${categoryId}`);
             setEditCategory(response.data);
             setFormData(response.data);
+            setShowEditModal(true);
         } catch (error) {
             console.error('Error fetching category details:', error);
         }
@@ -59,6 +61,26 @@ const ListCategory = () => {
             category.Category_Name.toLowerCase().includes(value.toLowerCase())
         );
         setSearchResult(filteredCategories);
+    };
+
+    const handleCloseEditModal = () => {
+        setShowEditModal(false);
+    };
+
+    const handleUpdateCategory = async () => {
+        try {
+            await axios.put(`http://localhost:4321/categories/${editCategory.Category_Id}`, formData);
+            fetchCategories();
+            setShowEditModal(false);
+            console.log('Category updated successfully');
+        } catch (error) {
+            console.error('Error updating category:', error);
+        }
+    };
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
     };
 
     return (
@@ -125,6 +147,35 @@ const ListCategory = () => {
                         </Button>
                     </div>
                 </Stack>
+                <Modal show={showEditModal} onHide={handleCloseEditModal} centered>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Edit Category</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <Form>
+                            <Form.Group className="mb-3" controlId="editCategoryName">
+                                <Form.Label>Category Name</Form.Label>
+                                <Form.Control type="text" name="Category_Name" value={formData.Category_Name} onChange={handleChange} />
+                            </Form.Group>
+                            <Form.Group className="mb-3" controlId="editParentId">
+                                <Form.Label>Parent ID</Form.Label>
+                                <Form.Control type="text" name="Parent_Id" value={formData.Parent_Id} onChange={handleChange} />
+                            </Form.Group>
+                            <Form.Group className="mb-3" controlId="editCategoryPath">
+                                <Form.Label>Category Path</Form.Label>
+                                <Form.Control type="text" name="Category_Path" value={formData.Category_Path} onChange={handleChange} />
+                            </Form.Group>
+                        </Form>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={handleCloseEditModal}>
+                            Cancel
+                        </Button>
+                        <Button variant="primary" onClick={handleUpdateCategory}>
+                            Update
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
             </Container>
         </>
     );
