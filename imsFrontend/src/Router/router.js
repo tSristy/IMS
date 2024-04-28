@@ -8,6 +8,8 @@ import Product from "../Pages/Home/Product";
 import TransactionMaster from "../Pages/Home/TransactionMaster";
 import CreateCategory from "../Pages/Category/CreateCategory";
 import ListCategory from "../Pages/Category/ListCategory";
+import CreateProduct from "../Pages/Product/CreateProduct";
+import ListProduct from "../Pages/Product/ListProduct";
 
 const router = createBrowserRouter([
     {
@@ -29,8 +31,21 @@ const router = createBrowserRouter([
                 element: <Category />
             },
             {
-                path: 'newcat',
+                path: 'ListCat',
                 element: <ListCategory />
+            },
+            {
+                path: 'newCat',
+                element: <CreateCategory />
+            },
+            {
+                path: 'ListProduct',
+                element: <ListProduct />
+                
+            },
+            {
+                path: 'CreateProduct',
+                element: <CreateProduct />
             },
             {
                 path: 'product',
