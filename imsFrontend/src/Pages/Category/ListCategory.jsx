@@ -147,7 +147,6 @@ const ListCategory = () => {
                         </Button>
                     </div>
                 </Stack>
-
                 <Modal show={showEditModal} onHide={handleCloseEditModal} centered>
                     <Modal.Header closeButton>
                         <Modal.Title>Edit Category</Modal.Title>
@@ -177,7 +176,6 @@ const ListCategory = () => {
                         </Button>
                     </Modal.Footer>
                 </Modal>
-
             </Container>
         </>
     );

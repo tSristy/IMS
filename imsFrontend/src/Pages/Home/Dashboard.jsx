@@ -63,7 +63,6 @@ const DashboardSidebar = () => {
                             <span className='ms-2 d-none d-sm-inline'>Dashboard</span>
                         </Link>
                         <hr />
-
                     </li>
 
                     <li className='w-100'>
