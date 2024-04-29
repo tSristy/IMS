@@ -7,6 +7,9 @@ import Home from "../Pages/Home/Home";
 import Product from "../Pages/Home/Product";
 import TransactionMaster from "../Pages/Home/TransactionMaster";
 import CreateCategory from "../Pages/Category/CreateCategory";
+import Menu from "../Pages/Menu/Menu";
+import CreateMenu from "../Pages/Menu/CreateMenu";
+import ListMenu from "../Pages/Menu/ListMenu";
 import ListCategory from "../Pages/Category/ListCategory";
 import CreateProduct from "../Pages/Product/CreateProduct";
 import ListProduct from "../Pages/Product/ListProduct";
@@ -25,6 +28,18 @@ const router = createBrowserRouter([
             {
                 path: 'home',
                 element: <Home />
+            },
+            {
+                path: 'menu',
+                element: <Menu />
+            },
+            {
+                path: 'ListMenu',
+                element: <ListMenu />
+            },
+            {
+                path: 'newMenu',
+                element: <CreateMenu />
             },
             {
                 path: 'category',

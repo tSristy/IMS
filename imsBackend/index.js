@@ -1,9 +1,11 @@
 const express = require('express');
+const mysql = require('mysql');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const { authenticateUser } = require('./Controller/userController');
 const { addCategory , getAllCategories,updateCategory,getCategoryById, deleteCategory, getAllCategoryIds} = require('./Controller/categoryController');
 const { addProduct, updateProduct, deleteProduct, getAllProducts, getProductById } = require('./Controller/productController'); 
+const { addMenu, getAllMenus,updatedMenu,getMenu, deletedMenu, getAllMenuIds } = require('./Controller/menuController');
 const Category = require('./Model/categoryModel');
 // const { addTransactionDetails } = require('./Controller/tDetailsController')
 const { addTransaction, getAllTransactionIds } =  require('./Controller/transactionsController');
@@ -38,6 +40,27 @@ app.post('/login', async (req, res) => {
        res.sendStatus(500);
    }
 });
+
+//Menu
+app.post('/menus', addMenu);
+app.get('/menus', getAllMenus);
+app.put('/menus/:id', updatedMenu);
+app.get('/menus/:id', getMenu);
+app.get('/menus/:id', getAllMenuIds);
+app.delete('/menus/:id', deletedMenu);
+
+//   app.get all menu items
+  app.get('/menus', async (req, res) => {
+    try {
+      const menus = await Menu.findAll({
+        attributes: ['Code', 'Title', 'URL_Path', 'Parent_Id', 'Is_Active']
+      });
+      res.json(menus);
+    } catch (error) {
+      console.error('Error fetching menus:', error);
+      res.status(500).json({ error: 'Failed to fetch menus' });
+    }
+  });
 
 // Category
 app.post('/categories', addCategory);

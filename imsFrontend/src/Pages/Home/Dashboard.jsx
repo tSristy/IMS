@@ -57,6 +57,16 @@ const DashboardSidebar = () => {
                     <li className='w-100'>
                         <Link
                             className='nav-link text-white px-0 align-middle'
+                            to="/menu">
+                            <i className='fs-4 bi-speedometer2 ms-2'></i>
+                            <span className='ms-2 d-none d-sm-inline'>Menu</span>
+                        </Link>
+                        <hr />
+                    </li>
+
+                    <li className='w-100'>
+                        <Link
+                            className='nav-link text-white px-0 align-middle'
                             to="/category">
                             <i className='fs-4 bi-columns ms-2'></i>
                             <span className='ms-2 d-none d-sm-inline'>Category</span>
