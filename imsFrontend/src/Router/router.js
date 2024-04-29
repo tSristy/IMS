@@ -10,6 +10,8 @@ import CreateCategory from "../Pages/Category/CreateCategory";
 import ListCategory from "../Pages/Category/ListCategory";
 import CreateProduct from "../Pages/Product/CreateProduct";
 import ListProduct from "../Pages/Product/ListProduct";
+import CreateOrg from "../Pages/Org_partners/CreateOrg";
+import ListOrg from "../Pages/Org_partners/ListOrg";
 
 const router = createBrowserRouter([
     {
@@ -46,6 +48,14 @@ const router = createBrowserRouter([
             {
                 path: 'CreateProduct',
                 element: <CreateProduct />
+            },
+            {
+                path: 'CreateOrg',
+                element: <CreateOrg />
+            },
+            {
+                path: 'ListOrg',
+                element: <ListOrg />
             },
             {
                 path: 'product',
