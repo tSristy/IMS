@@ -12,25 +12,29 @@ const CreateProduct = () => {
     Depreciation: '',
     Model_No: '',
     Category_Id: '',
-    Created_By: '',
-    Created_Date: '',
-    Modified_By: '',
-    Modified_Date: '',
+    // Created_By: '',
+    // Created_Date: '',
+    // Modified_By: '',
+    // Modified_Date: '',
   });
-  const [categoryIds, setCategoryIds] = useState([]);
+  const [categoryOptions, setCategoryOptions] = useState([]);
   const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
-    const fetchCategoryIds = async () => {
+    const fetchCategoryOptions  = async () => {
       try {
-        const response = await axios.get('http://localhost:4321/category-ids');
-        setCategoryIds(response.data);
+        const response = await axios.get('http://localhost:4321/categories');
+        const options = response.data.map(category => ({
+          id: category.Category_Id,
+          name: category.Category_Name,
+        }));
+        setCategoryOptions(options);
       } catch (error) {
         console.error('Error fetching category IDs:', error);
       }
     };
   
-    fetchCategoryIds();
+    fetchCategoryOptions();
   }, []);
 
   const handleChange = (e) => {
@@ -54,17 +58,17 @@ const CreateProduct = () => {
         Brand: '',
         Depreciation: '',
         Model_No: '',
-        Category_Name: '',
-        Created_By: '',
-        Created_Date: '',
-        Modified_By: '',
-        Modified_Date: '',
+        Category_Id: '',
+        // Created_By: '',
+        // Created_Date: '',
+        // Modified_By: '',
+        // Modified_Date: '',
       });
       console.log("Added product successfully")
       setErrorMessage('Succesfully Product added');
     } catch (error) {
-      console.error('Error submitting product data:', error);
-      setErrorMessage('Failed to submit product data. Please try again.');
+      console.error('Error submitting', error);
+      setErrorMessage('Failed to submit');
     }
   };
 
@@ -73,6 +77,7 @@ const CreateProduct = () => {
       <Row className="justify-content-md-center">
         <Col sm={12} md={6} lg={8}>
           <h4 className='mt-4 mb-5'>Add Product</h4>
+          {errorMessage && <p>{errorMessage}</p>}
           <Form onSubmit={handleSubmit}>
             <Row className="mb-3">
               <Form.Group as={Col} controlId="formGridProductType">
@@ -110,9 +115,14 @@ const CreateProduct = () => {
                 </FloatingLabel>
               </Form.Group>
 
-              <Form.Group as={Col} controlId="formGridCategory_Name">
-                <FloatingLabel controlId="floatingInput" label="Category Name" className="mb-3">
-                  <Form.Control type="text" name="Category_Name" value={formData.Category_Name} onChange={handleChange} required />
+              <Form.Group as={Col} controlId="formGridCategoryName">
+                <FloatingLabel controlId="floatingSelect" label="Category Name" className="mb-3">
+                  <Form.Select name="Category_Id" value={formData.Category_Id} onChange={handleChange} required>
+                    <option value="">Select Category</option>
+                    {categoryOptions.map(option => (
+                      <option key={option.id} value={option.id}>{option.name}</option>
+                    ))}
+                  </Form.Select>
                 </FloatingLabel>
               </Form.Group>
             </Row>

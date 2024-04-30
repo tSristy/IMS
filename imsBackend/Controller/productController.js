@@ -5,17 +5,17 @@ const Category = require('../Model/categoryModel');
 const addProduct = async (req, res) => {
   try {
     const { Product_Type, Product_Name, Brand, Depreciation, Model_No, Category_Id, Created_By, Created_Date, Modified_By, Modified_Date } = req.body;
-    const category = await Category.findOne({ where: { Name: Category_Name } });
-    if (!category) {
-      return res.status(404).json({ error: 'Category not found' });
-    }
+    // const category = await Category.findOne({ where: { Name: Category_Name } });
+    // if (!category) {
+    //   return res.status(404).json({ error: 'Category not found' });
+    // }
     const newProduct = await Product.create({
       Product_Type,
       Product_Name,
       Brand,
       Depreciation,
       Model_No,
-      Category_Id: category.id,
+      Category_Id,
       Created_By,
       Created_Date,
       Modified_By,
@@ -32,9 +32,28 @@ const addProduct = async (req, res) => {
 const updateProduct = async (req, res) => {
   const productId = req.params.id;
   try {
-    const updatedProduct = await Product.update(req.body, { where: { Product_Id: productId } });
+    console.log('Request body:', req.body);
+    console.log('Updating product with ID:', productId);
+    const { Product_Type, Product_Name, Brand, Depreciation, Model_No, Category_Id, Created_By, Created_Date, Modified_By, Modified_Date } = req.body;
+    const updatedProduct = await Product.update({
+      Product_Type,
+      Product_Name,
+      Brand,
+      Depreciation,
+      Model_No,
+      Category_Id,
+      Created_By,
+      Created_Date,
+      Modified_By,
+      Modified_Date,
+    }, { where: { Product_Id: productId } });
+
     if (updatedProduct[0] === 1) {
-      res.status(200).json({ message: 'Product updated successfully' });
+      const updatedProductWithCategory = await Product.findOne({
+        where: { Product_Id: productId },
+        include: [Category]
+      });
+      res.status(200).json(updatedProductWithCategory);
     } else {
       res.status(404).json({ error: 'Product not found' });
     }

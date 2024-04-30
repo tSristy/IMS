@@ -1,5 +1,6 @@
 const { DataTypes } = require('sequelize');
 const config = require('../Server/config');
+const Category = require('./categoryModel');
 
 const Product = config.define('products', {
     Product_Id : {
@@ -33,7 +34,8 @@ const Product = config.define('products', {
   },
   Created_By:{
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: false,
+    defaultValue: 'System'
   },
   Created_Date: {
     type: DataTypes.DATE,
@@ -42,14 +44,17 @@ const Product = config.define('products', {
   },
   Modified_By: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: false,
+    defaultValue: 'System'
   },
   Modified_Date: {
     type: DataTypes.DATE,
-    allowNull: false
+    allowNull: false,
+    defaultValue: DataTypes.NOW
   }
 }, {
   timestamps: false
 });
+Product.belongsTo(Category, { foreignKey: 'Category_Id' });
 
 module.exports = Product;
