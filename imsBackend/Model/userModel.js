@@ -16,7 +16,7 @@ const User = config.define('users', {
     type: DataTypes.STRING,
     allowNull: false
   },
-  Full_Name: {
+  Fullname: {
     type: DataTypes.STRING,
     allowNull: false
   },

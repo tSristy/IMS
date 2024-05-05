@@ -1,9 +1,9 @@
-import { IconButton, InputAdornment, InputLabel, OutlinedInput, TextField } from '@mui/material';
+import { IconButton, InputAdornment,InputLabel, OutlinedInput, TextField } from '@mui/material';
 import React, { useState } from 'react';
 import { Button, Form, Stack } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
-import { AccountCircle, Visibility, VisibilityOff } from '@mui/icons-material';
 import { URL } from '../../config';
+import { AccountCircle, Visibility, VisibilityOff } from '@mui/icons-material';
+import { useNavigate } from 'react-router-dom';
 
 const backGroundDiv = {
     height: "100vh",
@@ -17,51 +17,42 @@ const loginStyle = {
     borderRadius: "6%",
 }
 
-
 const Login = () => {
-    // const navigate = useNavigate();
-    const [userID, setUserID] = useState('');
+    const navigate = useNavigate();
+    const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [errMsg, setErrMsg] = useState()
+    const [errMsg, setErrMsg] = useState('');
 
-    const loginHandleBtn = (e) => {
-        console.log("click")
-        fetch(URL+'/login', {
-            // fetch(url + 'auth', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'Application/json'
-            },
-            body: JSON.stringify({
-                // rememberMe: true,
-                Username: userID,
-                Password: password
-            })
-        })
-            // .then(res => res.json())
-            .then(Response => {
-                console.log(Response.status)
-                if (Response.status === 200) {
-                    //     // const defaultUser = {
-                    //     //     isLoggedIn: true,
-                    //     //     userInfo: data
-                    //     // };
-                    // signIn(true);
-                    //     console.log(Response.status)
-                    //     // sessionStorage.setItem("loginInfo", JSON.stringify(defaultUser));
-                    // navigate('/')
-                }
-                // else {
-                //     // setErrMsg(data.msgText)
-                // }
-            })
-
+    const loginHandleBtn = async (e) => {
         e.preventDefault();
-    }
+        try {
+            const response = await fetch(URL + '/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    username: username,
+                    password: password
+                })
+            });
+    
+            if (response.ok) {
+                // Jwt token
+                const { token } = await response.json();
+                console.log('User successfully logged in. Token:', token);
+                navigate("/home");
+            } else {
+                console.log('User not valid');
+                setErrMsg('Invalid username or password');
+            }
+        } catch (error) {
+            console.error('Error during login:', error);
+            setErrMsg('Failed to connect to server');
+        }
+    };
 
-
-
-    const [showPassword, setShowPassword] = React.useState(false);
+    const [showPassword, setShowPassword] = useState(false);
     const handleClickShowPassword = () => setShowPassword((show) => !show);
     const handleMouseDownPassword = (event) => {
         event.preventDefault();
@@ -72,18 +63,16 @@ const Login = () => {
             <Stack gap={2} className="col-md-4 mx-auto">
                 <div style={loginStyle}>
                     <Form className='mt-5 mb-5' onSubmit={loginHandleBtn}>
-
                         <h5 className="text-center font-weight-bold">Welcome Back!</h5>
                         <p className="text-center mb-3">Enter your details to log into the system</p>
-
                         <Stack gap={2} className="col-md-9 mx-auto pt-3">
                             <div className="mt-3 mb-3">
-                                <InputLabel htmlFor="component-simple" style={{ fontSize: "14px", fontWeight: "600", padding: "2%" }}>Username</InputLabel>
+                                <InputLabel htmlFor="component-simple">Username</InputLabel>
                                 <TextField name="username"
                                     fullWidth
                                     variant="outlined"
                                     type="text"
-                                    onChange={(e) => setUserID(e.target.value)}
+                                    onChange={(e) => setUsername(e.target.value)}
                                     placeholder="Enter your username"
                                     InputProps={{
                                         style: {
@@ -97,9 +86,8 @@ const Login = () => {
                                     }}
                                 />
                             </div>
-
                             <div className="mb-3">
-                                <InputLabel htmlFor="component-simple" style={{ fontSize: "14px", fontWeight: "600", padding: "2%" }}>Password</InputLabel>
+                                <InputLabel htmlFor="component-simple">Password</InputLabel>
                                 <OutlinedInput
                                     id="standard-adornment-password"
                                     type={showPassword ? 'text' : 'password'}
@@ -125,27 +113,11 @@ const Login = () => {
                                     }
                                 />
                             </div>
-
                             <div className="d-grid gap-2 mt-4 mb-3">
-                                <Button type="submit"
-                                    style={{
-                                        backgroundColor: "#6375f0",
-                                        border: "none",
-                                        padding: "3%"
-                                    }}
-                                    // size="sm"
-                                    onClick={loginHandleBtn}
-                                >
-                                    Login
-                                </Button>
-                                {
-                                    (errMsg) && (<p className="text-center text-danger">{errMsg.toUpperCase()}</p>)
-                                }
+                                <Button type="submit" variant="primary">Login</Button>
+                                {(errMsg) && (<p className="text-center text-danger">{errMsg}</p>)}
                             </div>
                         </Stack>
-
-
-
                     </Form>
                 </div>
             </Stack>
