@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-// import './styles.css';
+import { Card, Form, Container, Row, Col, Button } from 'react-bootstrap';
 import TransactionDetails from './TransactionDetails';
 
 const TransactionMaster = () => {
@@ -122,55 +122,75 @@ const TransactionMaster = () => {
   };
 
   return (
-    <div className="container" style={{ maxWidth: '100%', display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
-      <div className="card" style={{ marginRight: '20px', marginBottom: '20px', padding: '20px', borderRadius: '5px', boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)', backgroundColor: '#fff', display: 'flex', flexDirection: 'column' }}>
-        <h1 style={{ textAlign: 'center' }}>Transaction Master</h1>
-        {errorMessage && <div className="error-message" style={{ marginBottom: '10px', color: 'red' }}>{errorMessage}</div>}
-        <form className="form" onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column' }}>
-          <div className="form-row" style={{ display: 'flex', flexWrap: 'wrap', marginBottom: '10px', alignItems: 'flex-start' }}>
-            <div className="form-col" style={{ flex: 1, maxWidth: 'calc(33.33% - 10px)', marginRight: '10px', marginBottom: '10px' }}>
-              <label htmlFor="docNo" style={{ width: 'auto', marginBottom: '5px', fontWeight: 'bold' }}>Doc No:</label>
-              <input type="text" id="docNo" name="docNo" value={docNo} onChange={handleDocNoChange} style={{ width: '100%', padding: '8px', marginBottom: '10px', boxSizing: 'border-box' }} />
-            </div>
-            <div className="form-col" style={{ flex: 1, maxWidth: 'calc(33.33% - 10px)', marginRight: '10px', marginBottom: '10px' }}>
-              <label htmlFor="refNo" style={{ width: 'auto', marginBottom: '5px', fontWeight: 'bold' }}>Ref No:</label>
-              <input type="text" id="refNo" name="refNo" value={refNo} onChange={handleRefNoChange} style={{ width: '100%', padding: '8px', marginBottom: '10px', boxSizing: 'border-box' }} />
-            </div>
-            <div className="form-col" style={{ flex: 1, maxWidth: 'calc(33.33% - 10px)', marginRight: '10px', marginBottom: '10px' }}>
-              <label htmlFor="mvtDate" style={{ width: 'auto', marginBottom: '5px', fontWeight: 'bold' }}>MVT Date:</label>
-              <input type="date" id="mvtDate" name="mvtDate" value={mvtDate} onChange={handleMvtDateChange} style={{ width: '100%', padding: '8px', marginBottom: '10px', boxSizing: 'border-box' }} />
-            </div>
-            <div className="form-col" style={{ flex: 1, maxWidth: 'calc(33.33% - 10px)', marginRight: '10px', marginBottom: '10px' }}>
-              <label htmlFor="mvtType" style={{ width: 'auto', marginBottom: '5px', fontWeight: 'bold' }}>MVT Type:</label>
-              <select id="mvtType" name="mvtType" value={mvtType} onChange={handleMvtTypeChange} style={{ width: '100%', padding: '8px', marginBottom: '10px', boxSizing: 'border-box' }}>
-                <option value="">Select Type</option>
-                <option value="Receive">Receive</option>
-                <option value="Issue">Issue</option>
-                <option value="Damage">Damage</option>
-              </select>
-            </div>
-            <div className="form-col" style={{ flex: 1, maxWidth: 'calc(33.33% - 10px)', marginRight: '10px', marginBottom: '10px' }}>
-              <label htmlFor="companyId" style={{ width: 'auto', marginBottom: '5px', fontWeight: 'bold' }}>Company ID:</label>
-              <input type="text" id="companyId" name="companyId" value={companyId} onChange={handleCompanyIdChange} style={{ width: '100%', padding: '8px', marginBottom: '10px', boxSizing: 'border-box' }} />
-            </div>
-            <div className="form-col" style={{ flex: 1, maxWidth: 'calc(33.33% - 10px)', marginRight: '10px', marginBottom: '10px' }}>
-              <label htmlFor="quantity" style={{ width: 'auto', marginBottom: '5px', fontWeight: 'bold' }}>Quantity:</label>
-              <input type="number" id="quantity" name="quantity" value={quantity} onChange={handleQuantityChange} style={{ width: '100%', padding: '8px', marginBottom: '10px', boxSizing: 'border-box' }} />
-            </div>
-            <div className="form-col" style={{ flex: 1, maxWidth: 'calc(33.33% - 10px)', marginRight: '10px', marginBottom: '10px' }}>
-              <label htmlFor="createdBy" style={{ width: 'auto', marginBottom: '5px', fontWeight: 'bold' }}>Created By:</label>
-              <input type="text" id="createdBy" name="createdBy" value={createdBy} onChange={handleCreatedByChange} style={{ width: '100%', padding: '8px', marginBottom: '10px', boxSizing: 'border-box' }} />
-            </div>
-            <div className="form-col" style={{ flex: 1, maxWidth: 'calc(33.33% - 10px)', marginRight: '10px', marginBottom: '10px' }}>
-              <label htmlFor="updatedBy" style={{ width: 'auto', marginBottom: '5px', fontWeight: 'bold' }}>Updated By:</label>
-              <input type="text" id="updatedBy" name="updatedBy" value={updatedBy} onChange={handleUpdatedByChange} style={{ width: '100%', padding: '8px', marginBottom: '10px', boxSizing: 'border-box' }} />
-            </div>
-          </div>
-          <TransactionDetails quantity={quantity} onTransactionDetailsChange={handleTransactionDetailsChange} />
-          <button type="submit" style={{ width: '100%', padding: '8px', backgroundColor: '#007bff', color: '#fff', border: 'none', borderRadius: '5px', cursor: 'pointer' }}>Submit</button>
-        </form>
-      </div>
-    </div>
+    <>
+    <Container fluid>
+      <Card>
+        <Card.Body>
+          <Card.Title className="text-center">Transaction Master</Card.Title>
+          {errorMessage && <div className="error-message" style={{ marginBottom: '10px', color: 'red' }}>{errorMessage}</div>}
+          <Form onSubmit={handleSubmit}>
+            <Row>
+              <Col>
+                <Form.Group controlId="docNo">
+                  <Form.Label>Doc No:</Form.Label>
+                  <Form.Control type="text" value={docNo} onChange={handleDocNoChange} />
+                </Form.Group>
+              </Col>
+              <Col>
+                <Form.Group controlId="refNo">
+                  <Form.Label>Ref No:</Form.Label>
+                  <Form.Control type="text" value={refNo} onChange={handleRefNoChange} />
+                </Form.Group>
+              </Col>
+              <Col>
+                <Form.Group controlId="mvtDate">
+                  <Form.Label>MVT Date:</Form.Label>
+                  <Form.Control type="date" value={mvtDate} onChange={handleMvtDateChange} />
+                </Form.Group>
+              </Col>
+              <Col>
+                <Form.Group controlId="mvtType">
+                  <Form.Label>MVT Type:</Form.Label>
+                  <Form.Select value={mvtType} onChange={handleMvtTypeChange}>
+                    <option value="">Select Type</option>
+                    <option value="Receive">Receive</option>
+                    <option value="Issue">Issue</option>
+                    <option value="Damage">Damage</option>
+                  </Form.Select>
+                </Form.Group>
+              </Col>
+              <Col>
+                <Form.Group controlId="companyId">
+                  <Form.Label>Company ID:</Form.Label>
+                  <Form.Control type="text" value={companyId} onChange={handleCompanyIdChange} />
+                </Form.Group>
+              </Col>
+              <Col>
+                <Form.Group controlId="quantity">
+                  <Form.Label>Quantity:</Form.Label>
+                  <Form.Control type="number" value={quantity} onChange={handleQuantityChange} />
+                </Form.Group>
+              </Col>
+              <Col>
+                <Form.Group controlId="createdBy">
+                  <Form.Label>Created By:</Form.Label>
+                  <Form.Control type="text" value={createdBy} onChange={handleCreatedByChange} />
+                </Form.Group>
+              </Col>
+              <Col>
+                <Form.Group controlId="updatedBy">
+                  <Form.Label>Updated By:</Form.Label>
+                  <Form.Control type="text" value={updatedBy} onChange={handleUpdatedByChange} />
+                </Form.Group>
+              </Col>
+            </Row>
+            <TransactionDetails quantity={quantity} onTransactionDetailsChange={handleTransactionDetailsChange} />
+            <Button type="submit" variant="primary" style={{ width: '100%' }}>Submit</Button>
+          </Form>
+        </Card.Body>
+      </Card>
+    </Container>
+    </>
   );
 };  
 
