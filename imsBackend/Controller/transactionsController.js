@@ -28,12 +28,14 @@ const addTransaction = async (req, res) => {
             Created_Date: createdDate,
             Modified_By: updatedBy,
             Modified_Date: modifiedDate,
-        });
+        }); 
 
+        const tempID = await newTransactionMaster.Id;
+        
         const newTransactionDetails = await Promise.all(transactionDetails.map(async detail => {
-            const { Transaction_Id, Product_Id, Serial_No, Unit_Price, Total_Price, Warranty, Created_By, Modified_By } = detail;
+            const {  Product_Id, Serial_No, Unit_Price, Total_Price, Warranty, Created_By, Modified_By } = detail;
             return await TransactionDetails.create({
-                Transaction_Id,
+                Transaction_Id: tempID,
                 Product_Id,
                 Serial_No,
                 Unit_Price,

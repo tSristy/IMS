@@ -4,7 +4,7 @@ import { Button, Col, Container, FloatingLabel, Form, Row, Stack } from 'react-b
 import { useNavigate } from 'react-router-dom';
 
 const CreateCategory = () => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     Category_Name: '',
     Parent_Id: '',

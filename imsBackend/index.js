@@ -16,6 +16,7 @@ app.use(bodyParser.json({ limit: "50mb" }));
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: true, parameterLimit: 50000 }));
 
 const { createUser, getAllUsers, findUserById, updateUserById, deleteUserById } = require('./Controller/userController');
+const { getAllRules } = require('./Controller/roleController');
 
 app.get('/', async(req,res)=>{
    const result = await getAllUsers();
@@ -71,6 +72,9 @@ app.delete('/products/:id', deleteProduct);
 // Transaction
 app.post('/transactions', addTransaction);
 app.get('/transaction_master', getAllTransactionIds);
+
+// Rules
+app.get('/roles',getAllRules);
 
 
 app.listen(4321)

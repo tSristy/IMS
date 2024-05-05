@@ -1,5 +1,6 @@
 const { DataTypes } = require('sequelize');
 const config = require('../Server/config');
+const TransactionMaster = require('./transactionMasterModel');
 
 const TransactionDetails = config.define('transaction_details', {
     Id : {
@@ -60,5 +61,8 @@ const TransactionDetails = config.define('transaction_details', {
 }, {
   timestamps: false
 });
+
+TransactionDetails.belongsTo(TransactionMaster);
+TransactionMaster.hasMany(TransactionDetails);
 
 module.exports = TransactionDetails;
