@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-// import './styles.css';
+import { Card, Form, Button, Container, Row, Col } from 'react-bootstrap';
 
 const TransactionDetails = ({ quantity, onTransactionDetailsChange }) => {
   const [productIds, setProductIds] = useState([]);
@@ -43,7 +43,7 @@ const TransactionDetails = ({ quantity, onTransactionDetailsChange }) => {
       const response = await fetch('http://localhost:4321/transaction_master');
       if (response.ok) {
         const data = await response.json();
-        setTransactionIds(data); 
+        setTransactionIds(data);
       } else {
         console.error('Failed to fetch transaction IDs:', response.statusText);
       }
@@ -52,146 +52,154 @@ const TransactionDetails = ({ quantity, onTransactionDetailsChange }) => {
     }
   };
 
-  const handleChange = (e, index) => {
-    const { name, value } = e.target;
-    setFormData(prevFormData => {
-      const updatedFormData = [...prevFormData];
-      updatedFormData[index][name] = value;
-      return updatedFormData;
-    });
+  const handleChange = (e, index, fieldName) => {
+    const { value } = e.target;
+    const updatedFormData = [...formData];
+    updatedFormData[index][fieldName] = value;
+    setFormData(updatedFormData);
 
-    // Pass the datat
-    onTransactionDetailsChange([...formData]);
-}
+    // Pass updated data
+    onTransactionDetailsChange(updatedFormData);
+    
+  }
 
   const renderTransactionDetailsForms = () => {
-    return formData.map((data, index) => (
-      <div className="card transaction-details" key={index}>
-        <h2>Transaction Details {index + 1}</h2>
-        <form className="form">
-          <div className="form-row">
-            <div className="form-col">
-              <label htmlFor={`transactionId${index}`}>Transaction:</label>
-              <select 
-                id={`transactionId${index}`} 
-                name={`transactionId`} 
-                value={data.transactionId} 
-                onChange={e => handleChange(e, index)}
-              >
-                <option value="">Select ID</option>
-                {transactionIds.map((id, idx) => (
-                  <option key={idx} value={id}>{id}</option>
-                ))}
-              </select>
-            </div>
+    return (
+      <>
+      <Container fluid style={{marginTop:'20px'}}>
+        {formData.map((data, index) => (
+          <Row key={index} className="justify-content-start mb-3">
+            <Col>
+              <Card>
+                <Card.Body>
+                  <Card.Title className="text-center">Details {index + 1}</Card.Title>
+                  <Form>
+                    <Row>
+                      <Col>
+                        <Form.Group className="mb-3" controlId={`transactionId${index}`}>
+                          <Form.Label>Transaction:</Form.Label>
+                          <Form.Select
+                            value={data.transactionId}
+                            onChange={e => handleChange(e, index, 'transactionId')}
+                          >
+                            <option value="">Select ID</option>
+                            {transactionIds.map((id, idx) => (
+                              <option key={idx} value={id}>{id}</option>
+                            ))}
+                          </Form.Select>
+                        </Form.Group>
+                      </Col>
+                      <Col>
+                        <Form.Group className="mb-3" controlId={`productId${index}`}>
+                          <Form.Label>Product:</Form.Label>
+                          <Form.Select
+                            value={data.productId}
+                            onChange={e => handleChange(e, index, 'productId')}
+                          >
+                            <option value="">Select ID</option>
+                            {productIds.map((id, idx) => (
+                              <option key={idx} value={id}>{id}</option>
+                            ))}
+                          </Form.Select>
+                        </Form.Group>
+                      </Col>
+                      <Col>
+                        <Form.Group className="mb-3" controlId={`unitPrice${index}`}>
+                          <Form.Label>Unit Price:</Form.Label>
+                          <Form.Control
+                            type="number"
+                            value={data.unitPrice}
+                            onChange={e => handleChange(e, index, 'unitPrice')}
+                          />
+                        </Form.Group>
+                      </Col>
+                      <Col>
+                        <Form.Group className="mb-3" controlId={`totalPrice${index}`}>
+                          <Form.Label>Total Price:</Form.Label>
+                          <Form.Control
+                            type="number"
+                            value={data.totalPrice}
+                            onChange={e => handleChange(e, index, 'totalPrice')}
+                          />
+                        </Form.Group>
+                      </Col>
+                      <Col>
+                        <Form.Group className="mb-3" controlId={`serialNo${index}`}>
+                          <Form.Label>Serial No:</Form.Label>
+                          <Form.Control
+                            type="text"
+                            value={data.serialNo}
+                            onChange={e => handleChange(e, index, 'serialNo')}
+                          />
+                        </Form.Group>
+                      </Col>
+                      <Col>
+                        <Form.Group className="mb-3" controlId={`warranty${index}`}>
+                          <Form.Label>Warranty:</Form.Label>
+                          <Form.Control
+                            type="text"
+                            value={data.warranty}
+                            onChange={e => handleChange(e, index, 'warranty')}
+                          />
+                        </Form.Group>
+                      </Col>
+                      <Col>
+                        <Form.Group className="mb-3" controlId={`storeFromId${index}`}>
+                          <Form.Label>Store From:</Form.Label>
+                          <Form.Control
+                            type="text"
+                            value={data.storeFromId}
+                            onChange={e => handleChange(e, index, 'storeFromId')}
+                          />
+                        </Form.Group>
+                      </Col>
+                      <Col>
+                        <Form.Group className="mb-3" controlId={`storeToId${index}`}>
+                          <Form.Label>Store To:</Form.Label>
+                          <Form.Control
+                            type="text"
+                            value={data.storeToId}
+                            onChange={e => handleChange(e, index, 'storeToId')}
+                          />
+                        </Form.Group>
+                      </Col>
+                      <Col>
+                        <Form.Group className="mb-3" controlId={`createdBy${index}`}>
+                          <Form.Label>Created By:</Form.Label>
+                          <Form.Control
+                            type="text"
+                            value={data.createdBy}
+                            onChange={e => handleChange(e, index, 'createdBy')}
+                          />
+                        </Form.Group>
+                      </Col>
+                      <Col>
+                        <Form.Group className="mb-3" controlId={`updatedBy${index}`}>
+                          <Form.Label>Updated By:</Form.Label>
+                          <Form.Control
+                            type="text"
+                            value={data.updatedBy}
+                            onChange={e => handleChange(e, index, 'updatedBy')}
+                          />
+                        </Form.Group>
+                      </Col>
+                    </Row>
+                  </Form>
+                </Card.Body>
+              </Card>
+            </Col>
+          </Row>
+        ))}
+      </Container>
+    </>
+    );
+  }
 
-            <div className="form-col">
-              <label htmlFor={`productId${index}`}>Product:</label>
-              <select 
-                id={`productId${index}`} 
-                name={`productId`} 
-                value={data.productId} 
-                onChange={e => handleChange(e, index)}
-              >
-                <option value="">Select ID</option>
-                {productIds.map((id, idx) => (
-                  <option key={idx} value={id}>{id}</option>
-                ))}
-              </select>
-            </div>
-
-            <div className="form-col">
-              <label htmlFor={`unitPrice${index}`}>Unit Price:</label>
-              <input 
-                type="number" 
-                id={`unitPrice${index}`} 
-                name="unitPrice" 
-                value={data.unitPrice} 
-                onChange={e => handleChange(e, index)} 
-              />
-            </div>
-            
-            <div className="form-col">
-              <label htmlFor={`totalPrice${index}`}>Total Price:</label>
-              <input 
-                type="number" 
-                id={`totalPrice${index}`} 
-                name="totalPrice" 
-                value={data.totalPrice} 
-                onChange={e => handleChange(e, index)} 
-              />
-            </div>
-            <div className="form-col">
-              <label htmlFor={`serialNo${index}`}>Serial No:</label>
-              <input 
-                type="text" 
-                id={`serialNo${index}`} 
-                name="serialNo" 
-                value={data.serialNo}
-                onChange={e => handleChange(e, index)} 
-              />
-            </div>
-            <div className="form-col">
-              <label htmlFor={`warranty${index}`}>Warranty:</label>
-              <input 
-                type="text" 
-                id={`warranty${index}`} 
-                name="warranty" 
-                value={data.warranty} 
-                onChange={e => handleChange(e, index)} 
-              />
-            </div>
-            <div className="form-col">
-              <label htmlFor={`storeFromId${index}`}>Store From:</label>
-              <input 
-                type="text" 
-                id={`storeFromId${index}`} 
-                name="storeFromId" 
-                value={data.storeFromId} 
-                onChange={e => handleChange(e, index)} 
-              />
-            </div>
-            <div className="form-col">
-              <label htmlFor={`storeToId${index}`}>Store To:</label>
-              <input 
-                type="text" 
-                id={`storeToId${index}`} 
-                name="storeToId" 
-                value={data.storeToId} 
-                onChange={e => handleChange(e, index)} 
-              />
-            </div>
-            <div className="form-col">
-              <label htmlFor={`createdBy${index}`}>Created By:</label>
-              <input 
-                type="text" 
-                id={`createdBy${index}`} 
-                name="createdBy" 
-                value={data.createdBy} 
-                onChange={e => handleChange(e, index)} 
-              />
-            </div>
-            <div className="form-col">
-              <label htmlFor={`updatedBy${index}`}>Updated By:</label>
-              <input 
-                type="text" 
-                id={`updatedBy${index}`} 
-                name="updatedBy" 
-                value={data.updatedBy} 
-                onChange={e => handleChange(e, index)} 
-              />
-            </div>
-          </div>
-        </form>
+    return (
+      <div className="container">
+        {renderTransactionDetailsForms()}
       </div>
-    ));
+    );
   };
 
-  return (
-    <div className="container">
-      {renderTransactionDetailsForms()}
-    </div>
-  );
-};
-
-export default TransactionDetails;
+  export default TransactionDetails;
