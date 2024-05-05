@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Link, Outlet } from 'react-router-dom';
 import "bootstrap-icons/font/bootstrap-icons.css";
 
@@ -39,6 +39,17 @@ const DashboardSidebar = () => {
                             to="/ListProduct">
                             <i className='fs-4 bi-speedometer2 ms-2'></i>
                             <span className='ms-2 d-none d-sm-inline'>NEW product UX/UI</span>
+                        </Link>
+                        <hr />
+
+                    </li>
+
+                    <li className='w-100'>
+                        <Link
+                            className='nav-link text-white px-0 align-middle'
+                            to="/ListOrg">
+                            <i className='fs-4 bi-speedometer2 ms-2'></i>
+                            <span className='ms-2 d-none d-sm-inline'>Org Partner</span>
                         </Link>
                         <hr />
 
@@ -112,11 +123,11 @@ const DashboardSidebar = () => {
 
 // DashboardTopBar
 const DashboardTopBar = () => {
-    const [dropDown, setDropdown] = useState(false);
+    // const [dropDown, setDropdown] = useState(false);
 
-    const toggleDropdown = () => {
-        setDropdown(!dropDown);
-    };
+    // const toggleDropdown = () => {
+    //     setDropdown(!dropDown);
+    // };
 
     return (
         <div className='p-5  pt-2 pb-2 d-flex flex-row-reverse border bg-white'>

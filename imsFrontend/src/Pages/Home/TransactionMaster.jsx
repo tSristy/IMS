@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-// import './styles.css';
+import { Card, Form, Container, Row, Col, Button } from 'react-bootstrap';
 import TransactionDetails from './TransactionDetails';
 
 const TransactionMaster = () => {
@@ -122,59 +122,76 @@ const TransactionMaster = () => {
   };
 
   return (
-    <div className="container">
-      <div className="card">
-        <h1>Transaction Master</h1>
-        {errorMessage && <div className="error-message">{errorMessage}</div>}
-        <form className="form" onSubmit={handleSubmit}>
-          <div className="form-row">
-            <div className="form-col">
-              <label htmlFor="docNo">Doc No:</label>
-              <input type="text" id="docNo" name="docNo" value={docNo} onChange={handleDocNoChange} />
-            </div>
-
-            <div className="form-col">
-              <label htmlFor="refNo">Ref No:</label>
-              <input type="text" id="refNo" name="refNo" value={refNo} onChange={handleRefNoChange} />
-            </div>
-            <div className="form-col">
-              <label htmlFor="mvtDate">MVT Date:</label>
-              <input type="date" id="mvtDate" name="mvtDate" value={mvtDate} onChange={handleMvtDateChange} />
-            </div>
-            <div className="form-col">
-              <label htmlFor="mvtType">MVT Type:</label>
-              <select id="mvtType" name="mvtType" value={mvtType} onChange={handleMvtTypeChange}>
-                <option value="">Select Type</option>
-                <option value="Receive">Receive</option>
-                <option value="Issue">Issue</option>
-                <option value="Damage">Damage</option>
-              </select>
-            </div>
-
-            <div className="form-col">
-              <label htmlFor="companyId">Company ID:</label>
-              <input type="text" id="companyId" name="companyId" value={companyId} onChange={handleCompanyIdChange} />
-            </div>
-            <div className="form-col">
-              <label htmlFor="quantity">Quantity:</label>
-              <input type="number" id="quantity" name="quantity" value={quantity} onChange={handleQuantityChange} />
-            </div>
-            <div className="form-col">
-              <label htmlFor="createdBy">Created By:</label>
-              <input type="text" id="createdBy" name="createdBy" value={createdBy} onChange={handleCreatedByChange} />
-            </div>
-            <div className="form-col">
-              <label htmlFor="updatedBy">Updated By:</label>
-              <input type="text" id="updatedBy" name="updatedBy" value={updatedBy} onChange={handleUpdatedByChange} />
-            </div>
-          </div>
-          
-          <TransactionDetails quantity={quantity} onTransactionDetailsChange={handleTransactionDetailsChange} />
-          <button type="submit">Submit</button>
-        </form>
-      </div>
-    </div>
+    <>
+    <Container fluid>
+      <Card>
+        <Card.Body>
+          <Card.Title className="text-center">Transaction Master</Card.Title>
+          {errorMessage && <div className="error-message" style={{ marginBottom: '10px', color: 'red' }}>{errorMessage}</div>}
+          <Form onSubmit={handleSubmit}>
+            <Row>
+              <Col>
+                <Form.Group controlId="docNo">
+                  <Form.Label>Doc No:</Form.Label>
+                  <Form.Control type="text" value={docNo} onChange={handleDocNoChange} />
+                </Form.Group>
+              </Col>
+              <Col>
+                <Form.Group controlId="refNo">
+                  <Form.Label>Ref No:</Form.Label>
+                  <Form.Control type="text" value={refNo} onChange={handleRefNoChange} />
+                </Form.Group>
+              </Col>
+              <Col>
+                <Form.Group controlId="mvtDate">
+                  <Form.Label>MVT Date:</Form.Label>
+                  <Form.Control type="date" value={mvtDate} onChange={handleMvtDateChange} />
+                </Form.Group>
+              </Col>
+              <Col>
+                <Form.Group controlId="mvtType">
+                  <Form.Label>MVT Type:</Form.Label>
+                  <Form.Select value={mvtType} onChange={handleMvtTypeChange}>
+                    <option value="">Select Type</option>
+                    <option value="Receive">Receive</option>
+                    <option value="Issue">Issue</option>
+                    <option value="Damage">Damage</option>
+                  </Form.Select>
+                </Form.Group>
+              </Col>
+              <Col>
+                <Form.Group controlId="companyId">
+                  <Form.Label>Company ID:</Form.Label>
+                  <Form.Control type="text" value={companyId} onChange={handleCompanyIdChange} />
+                </Form.Group>
+              </Col>
+              <Col>
+                <Form.Group controlId="quantity">
+                  <Form.Label>Quantity:</Form.Label>
+                  <Form.Control type="number" value={quantity} onChange={handleQuantityChange} />
+                </Form.Group>
+              </Col>
+              <Col>
+                <Form.Group controlId="createdBy">
+                  <Form.Label>Created By:</Form.Label>
+                  <Form.Control type="text" value={createdBy} onChange={handleCreatedByChange} />
+                </Form.Group>
+              </Col>
+              <Col>
+                <Form.Group controlId="updatedBy">
+                  <Form.Label>Updated By:</Form.Label>
+                  <Form.Control type="text" value={updatedBy} onChange={handleUpdatedByChange} />
+                </Form.Group>
+              </Col>
+            </Row>
+            <TransactionDetails quantity={quantity} onTransactionDetailsChange={handleTransactionDetailsChange} />
+            <Button type="submit" variant="primary" style={{ width: '100%' }}>Submit</Button>
+          </Form>
+        </Card.Body>
+      </Card>
+    </Container>
+    </>
   );
-};
+};  
 
 export default TransactionMaster;
