@@ -8,7 +8,7 @@ const Category = require('./Model/categoryModel');
 // const { addTransactionDetails } = require('./Controller/tDetailsController')
 const { addTransaction, getAllTransactionIds } =  require('./Controller/transactionsController');
 const { addOrgPartner, updateOrgPartner, deleteOrgPartner, getAllOrgPartners,getOrgPartnerById } = require('./Controller/OrgPartnerController');
-
+const { addRoleMenuLink, updateRoleMenuLink, deleteRoleMenuLink, getAllRoleMenuLinks, getRoleMenuLinkById } = require('./Controller/rolemenulinkController');
 const app = express();
 app.use(cors({
     origin: 'http://localhost:3000'
@@ -79,6 +79,13 @@ app.get('/orgPartners', getAllOrgPartners);
 // Transaction
 app.post('/transactions', addTransaction);
 app.get('/transaction_master', getAllTransactionIds);
+
+// Role menu Links
+app.post('/rolemenulinks', addRoleMenuLink);
+app.put('/rolemenulinks/:id', updateRoleMenuLink);
+app.delete('/rolemenulinks/:id', deleteRoleMenuLink);
+app.get('/rolemenulinks', getAllRoleMenuLinks);
+app.get('/rolemenulinks/:id', getRoleMenuLinkById);;
 
 
 app.listen(4321)
