@@ -12,8 +12,8 @@ import CreateProduct from "../Pages/Product/CreateProduct";
 import ListProduct from "../Pages/Product/ListProduct";
 import CreateOrg from "../Pages/Org_partners/CreateOrg";
 import ListOrg from "../Pages/Org_partners/ListOrg";
-import ListroleMenulink from "../Pages/Role/ListroleMenulink";
-import CreateroleMenuLink from "../Pages/Role/CreateroleMenuLink";
+import ListroleMenulink from "../Pages/Role Menu Links/ListroleMenulink";
+import CreateroleMenuLink from "../Pages/Role Menu Links/CreateroleMenuLink";
 
 
 const router = createBrowserRouter([
