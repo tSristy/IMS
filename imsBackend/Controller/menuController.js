@@ -45,8 +45,8 @@ const updatedMenu = async (req, res) => {
     );
     res.sendStatus(204);
   } catch (error) {
-    console.error('Error updating category:', error);
-    res.status(500).json({ error: 'Failed to update category' });
+    console.error('Error updating menu:', error);
+    res.status(500).json({ error: 'Failed to update menu' });
   }
 };
 

@@ -9,6 +9,7 @@ const { addMenu, getAllMenus,updatedMenu,getMenu, deletedMenu, getAllMenuIds } =
 const Category = require('./Model/categoryModel');
 // const { addTransactionDetails } = require('./Controller/tDetailsController')
 const { addTransaction, getAllTransactionIds } =  require('./Controller/transactionsController');
+const { addOrgPartner, updateOrgPartner, deleteOrgPartner, getAllOrgPartners,getOrgPartnerById } = require('./Controller/OrgPartnerController');
 
 const app = express();
 app.use(cors({
@@ -88,6 +89,13 @@ app.get('/products', getAllProducts);
 app.put('/products/:id', updateProduct);
 app.get('/products/:id', getProductById);
 app.delete('/products/:id', deleteProduct);
+
+// Org Partner
+app.post('/addOrgPartner', addOrgPartner);
+app.put('/orgPartners/:id', updateOrgPartner);
+app.delete('/orgPartners/:id', deleteOrgPartner);
+app.get('/orgPartners/:id',getOrgPartnerById);
+app.get('/orgPartners', getAllOrgPartners);
 
 
 

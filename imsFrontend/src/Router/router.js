@@ -13,6 +13,10 @@ import ListMenu from "../Pages/Menu/ListMenu";
 import ListCategory from "../Pages/Category/ListCategory";
 import CreateProduct from "../Pages/Product/CreateProduct";
 import ListProduct from "../Pages/Product/ListProduct";
+import CreateOrg from "../Pages/Org_partners/CreateOrg";
+import ListOrg from "../Pages/Org_partners/ListOrg";
+//import CreateRole from "../Pages/Roles/CreateRole";
+//import ListRole from "../Pages/Roles/ListRole";
 
 const router = createBrowserRouter([
     {
@@ -63,13 +67,29 @@ const router = createBrowserRouter([
                 element: <CreateProduct />
             },
             {
+                path: 'CreateOrg',
+                element: <CreateOrg />
+            },
+            {
+                path: 'ListOrg',
+                element: <ListOrg />
+            },
+            {
                 path: 'product',
                 element: <Product />
             },
             {
                 path: 'transactionMaster',
                 element: <TransactionMaster />
-            }          
+            },
+            /*{
+                path: 'ListRole',
+                element: <ListRole />
+            },
+            {
+                path: 'newRole',
+                element: <CreateRole />
+            } */        
         ]
     }
 ])
