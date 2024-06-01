@@ -14,7 +14,7 @@ const ListProduct = () => {
         Brand: '',
         Depreciation: '',
         Model_No: '',
-        Category_Name: '',
+        Category_Id: '',
         Created_By: '',
         Created_Date: '',
         Modified_By: '',
@@ -33,14 +33,15 @@ const ListProduct = () => {
     const fetchProducts = async () => {
         try {
             const response = await axios.get('http://localhost:4321/products');
-            const productsWithCategoryNames = await Promise.all(response.data.map(async (product) => {
-                const categoryResponse = await axios.get(`http://localhost:4321/categories/${product.Category_Id}`);
-                return {
-                    ...product,
-                    Category_Name: categoryResponse.data.Category_Name
-                };
-            }));
-            setProducts(productsWithCategoryNames);
+            // const productsWithCategoryNames = await Promise.all(response.data.map(async (product) => {
+            //     const categoryResponse = await axios.get(`http://localhost:4321/categories/${product.Category_Id}`);
+            //     return {
+            //         ...product,
+            //         Category_Name: categoryResponse.data.Category_Name
+            //     };
+            // }));
+            // setProducts(productsWithCategoryNames);
+            setProducts(response.data);
         } catch (error) {
             console.error('Error fetching products:', error);
         }
@@ -59,11 +60,7 @@ const ListProduct = () => {
         try {
             const response = await axios.get(`http://localhost:4321/products/${productId}`);
             setEditProduct(response.data);
-            const categoryResponse = await axios.get(`http://localhost:4321/categories/${response.data.Category_Id}`);
-            setFormData({
-                ...response.data,
-                Category_Name: categoryResponse.data.Category_Name
-            });
+            setFormData(response.data);
             setShowEditModal(true);
         } catch (error) {
             console.error('Error fetching product details:', error);
@@ -154,7 +151,7 @@ const ListProduct = () => {
                                         <td className='p-2'>{product.Brand}</td>
                                         <td className='p-2'>{product.Depreciation}</td>
                                         <td className='p-2'>{product.Model_No}</td>
-                                        <td className='p-2'>{product.Category_Name}</td>
+                                        <td className='p-2'>{categories.find(cat => cat.Category_Id === product.Category_Id)?.Category_Name}</td>
                                         <td className='p-2'>
                                             <Button className='m-0 p-0' variant='none' onClick={() => handleEdit(product.Product_Id)}><i class="bi bi-pencil-square" style={{ color: "blue" }}></i></Button>
                                         </td>
@@ -221,10 +218,10 @@ const ListProduct = () => {
                                 <Col>
                                     <Form.Group className="mb-3" controlId="editCategory">
                                         <Form.Label>Category</Form.Label>
-                                        <Form.Select name="Category_Name" value={formData.Category_Name} onChange={handleChange}>
+                                        <Form.Select name="Category_Id" value={formData.Category_Id} onChange={handleChange}>
                                             <option value="">Select Category</option>
                                             {categories.map((category) => (
-                                                <option key={category.Category_Id} value={category.Category_Name}>{category.Category_Name}</option>
+                                                <option key={category.Category_Id} value={category.Category_Id}>{category.Category_Name}</option>
                                             ))}
                                         </Form.Select>
                                     </Form.Group>

@@ -108,6 +108,17 @@ const DashboardSidebar = () => {
 
                     </li>
 
+                    <li className='w-100'>
+                        <Link
+                            className='nav-link text-white px-0 align-middle'
+                            to="/rolemenulink">
+                            <i className='fs-4 bi-cash ms-2'></i>
+                            <span className='ms-2 d-none d-sm-inline'>Role Menu Links</span>
+                        </Link>
+                        <hr />
+
+                    </li>
+
                      <li className='w-100'>
                       <Link 
                           className='nav-link text-white px-0 align-middle'
